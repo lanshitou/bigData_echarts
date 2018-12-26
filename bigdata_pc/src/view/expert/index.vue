@@ -1,163 +1,143 @@
 <template>
   <div class="body">
-    <Row :gutter="32" >
-      <Col span="6" >
-      <Card>
-        <p slot="title" style="height: 90px">
-          <span>专家数量</span>
-          <br><br><br>
-          <span style="font-size: 40px;">{{expertAll}}</span>
-        </p>
-        <Tooltip content="平台注册所有专家数" placement="left-end"  slot="extra">
-          <Icon type="ios-information-outline" size="24"></Icon>
-        </Tooltip>
-        <p>本月认证 &nbsp;&nbsp;&nbsp;{{expertNum}}</p>
-      </Card>
+    <Row type="flex" justify="start" :gutter="16">
+      <Col span="8">
+      <Row type="flex" justify="start" class="headTitle" >
+        专家等级
+      </Row>
+      <Row class="card" type="flex" justify="start">
+        <div id="activity" style="height:450px;width: 100%"></div>
+      </Row>
       </Col>
-      <Col span="6" >
-      <Card>
-        <p slot="title" style="height: 90px">
-          <span>覆盖区域</span>
-          <br><br><br>
-          <span style="font-size: 40px;">{{areaAll}}</span>
-        </p>
-        <Tooltip content="平台覆盖的区域" placement="left-end"  slot="extra">
-          <Icon type="ios-information-outline" size="24"></Icon>
-        </Tooltip>
-        <p>本月新增城市 &nbsp;&nbsp;&nbsp;{{addAreaNum}}</p>
-      </Card>
+      <Col span="10">
+      <Row type="flex" justify="start" class="headTitle">
+        专家分布区域图
+      </Row>
+      <Row class="card" style="position:relative;">
+        <div id="map" style="height:560px;" ></div>
+        <div style="position: absolute;left: 30px;bottom:30px">
+          <RadioGroup v-model="button" type="button" @on-change="changeMap">
+            <Radio label="0">区域热力</Radio>
+            <Radio label="1">专家分布</Radio>
+          </RadioGroup>
+        </div>
+      </Row>
       </Col>
-      <Col span="6" >
-      <Card>
-        <p slot="title" style="height: 90px">
-          <span>覆盖作物领域</span>
-          <br><br><br>
-          <span style="font-size: 40px;">{{plantAll}}</span>
-        </p>
-        <Tooltip content="平台覆盖作物的区域" placement="left-end"  slot="extra">
-          <Icon type="ios-information-outline" size="24"></Icon>
-        </Tooltip>
-        <p>今日增长 &nbsp;&nbsp;&nbsp;{{plantNum}}</p>
-      </Card>
-      </Col>
-      <Col span="6" >
-      <Card>
-        <p slot="title" style="height: 90px">
-          <span>解答问题数</span>
-          <br><br><br>
-          <span style="font-size: 40px;">{{questionAll}}</span></p>
-        <Tooltip content="平台专家解答问题数" placement="left-end"  slot="extra">
-          <Icon type="ios-information-outline" size="24"></Icon>
-        </Tooltip>
-        <p>本月解答 &nbsp;&nbsp;&nbsp;{{questionNum}}</p>
-      </Card>
+      <Col span="6">
+      <Row type="flex" justify="start" class="headTitle">
+        专家数据展示
+      </Row>
+      <Row class="card" style="padding: 20px">
+        <Row type="flex" justify="start" style="font-size: 14px;color:#777">
+          专家数量
+        </Row>
+        <Row class="mintoritem">
+          <div style="float: right">
+            <span class="mintor">{{expertAll}}人 /</span>
+            <span class="mintor">本月新增 {{expertNum}}人</span>
+          </div>
+        </Row>
+        <Row type="flex" justify="start" style="font-size: 14px;color:#777">
+          覆盖区域
+        </Row>
+        <Row class="mintoritem">
+          <div style="float: right">
+            <span class="mintor">{{areaAll}}  个/</span>
+            <span class="mintor">本月新增 {{addAreaNum}} 个</span>
+          </div>
+        </Row>
+        <Row type="flex" justify="start" style="font-size: 14px;color:#777">
+          覆盖作物领域
+        </Row>
+        <Row class="mintoritem">
+          <div style="float: right">
+            <span class="mintor">{{plantAll}} 种/</span>
+            <span class="mintor">本月新增 {{plantNum}}种</span>
+          </div>
+        </Row>
+        <Row type="flex" justify="start" style="font-size: 14px;color:#777">
+          解答问题数
+        </Row>
+        <Row class="mintoritem">
+          <Col span="24">
+          <div style="float: right">
+            <span class="mintor">{{questionAll}}个 /</span>
+            <span class="mintor">本月增长 {{questionNum}}个</span>
+          </div>
+          </Col>
+        </Row>
+        <Row type="flex" justify="start" style="font-size: 14px;color:#777">
+          线下服务次数
+        </Row>
+        <Row class="mintoritem">
+          <div style="float: right">
+            <span class="mintor">{{serviceAll}} 次/</span>
+            <span class="mintor">本月增长 {{serviceNum}}次</span>
+          </div>
+        </Row>
+        <Row type="flex" justify="start" style="font-size: 14px;color:#777">
+          总被采纳数
+        </Row>
+        <Row class="mintoritem">
+          <div style="float: right">
+            <span class="mintor">{{adoptAll}} 次/</span>
+            <span class="mintor">本月新增 {{adoptNum}}次</span>
+          </div>
+        </Row>
+        <Row type="flex" justify="start" style="font-size: 14px;color:#777">
+          被评价次数
+        </Row>
+        <Row class="mintoritem">
+          <div style="float: right">
+            <span class="mintor">{{evaluateAll}} 次/</span>
+            <span class="mintor">本月新增 {{evaluateNum}}次</span>
+          </div>
+        </Row>
+        <Row type="flex" justify="start" style="font-size: 14px;color:#777">
+          在线视频教学时长
+        </Row>
+        <Row class="mintoritem">
+          <div style="float: right">
+            <span class="mintor">{{videoAll}}mins /</span>
+            <span class="mintor">本月新增 {{videoNum}}mins</span>
+          </div>
+        </Row>
+      </Row>
       </Col>
     </Row>
-    <Row :gutter="32" style="margin-top: 20px">
-      <Col span="6" >
-      <Card>
-        <p slot="title" style="height: 90px">
-          <span>线下服务次数</span>
-          <br><br><br>
-          <span style="font-size: 40px;">{{serviceAll}}</span>
-        </p>
-        <Tooltip content="平台专家现在服务次数" placement="left-end"  slot="extra">
-          <Icon type="ios-information-outline" size="24"></Icon>
-        </Tooltip>
-        <p>本月线下服务 &nbsp;&nbsp;&nbsp;{{serviceNum}}次</p>
-      </Card>
-      </Col>
-      <Col span="6" >
-      <Card>
-        <p slot="title" style="height: 90px">
-          <span>总被采纳数</span>
-          <br><br><br>
-          <span style="font-size: 40px;">{{adoptAll}}</span>
-        </p>
-        <Tooltip content="平台专家回答问题被采纳数" placement="left-end"  slot="extra">
-          <Icon type="ios-information-outline" size="24"></Icon>
-        </Tooltip>
-        <p>本月新增采纳 &nbsp;&nbsp;&nbsp;{{adoptNum}}</p>
-      </Card>
-      </Col>
-      <Col span="6" >
-      <Card>
-        <p slot="title" style="height: 90px">
-          <span>被评价次数</span>
-          <br><br><br>
-          <span style="font-size: 40px;">{{evaluateAll}}</span>
-        </p>
-        <Tooltip content="平台专家回答问题被评价数" placement="left-end"  slot="extra">
-          <Icon type="ios-information-outline" size="24"></Icon>
-        </Tooltip>
-        <p>本月被评价 &nbsp;&nbsp;&nbsp;{{evaluateNum}}次</p>
-      </Card>
-      </Col>
-      <Col span="6" >
-      <Card>
-        <p slot="title" style="height: 90px">
-          <span>在线视频教学时长</span>
-          <br><br><br>
-          <span style="font-size: 40px;">{{videoAll}}</span></p>
-        <Tooltip content="平台专家在线视频教学时长" placement="left-end"  slot="extra">
-          <Icon type="ios-information-outline" size="24"></Icon>
-        </Tooltip>
-        <p>本月最新视频 &nbsp;&nbsp;&nbsp;{{videoNum}}mins</p>
-      </Card>
-      </Col>
-    </Row >
-
-    <div style="background-color: #404a59">
-      <!--地图=================================================================================================-->
-      <Row style="margin-top: 20px;" type="flex" justify="center">
-        <Col span="24" >
-        <div style="position: relative">
-          <div style="width: 20%;height: 10%;position: absolute;left:20px;bottom:0;z-index:1">
-            <RadioGroup v-model="button" type="button" @on-change="changeMap">
-              <Radio label="0">区域热力</Radio>
-              <Radio label="1">专家分布</Radio>
-            </RadioGroup>
-          </div>
-          <div id="map" style="height:800px;" >
-          </div>
-        </div>
-        </Col>
+    <Row type="flex" justify="start" :gutter="16" style="min-height: 300px;margin-top: 30px">
+      <Col span="8">
+      <Row type="flex" justify="start" class="headTitle" >
+        专家活跃度
       </Row>
-
-    </div>
-
-    <Row :gutter="32" style="margin-top: 20px">
-      <!--柱状排行榜图=================================================================================================-->
-      <Col span="12" >
-      <Card>
-        <p slot="title" style="height: 70px">
-          <span>专家排行榜</span>
-          <br>
-
-          <RadioGroup v-model="expert" type="button" @on-change="changeExpert" style="margin-top: 18px">
-            <Radio label="1">活跃度</Radio>
-            <Radio label="2">好评度</Radio>
-          </RadioGroup>
-        </p>
-        <p><div id="plant" style="height:400px;"></div></p>
-      </Card>
+      <Row class="card2" type="flex" justify="start">
+        <div id="plant" style="min-height:200px;width: 100%"/>
+      </Row>
       </Col>
-      <!--饼图=================================================================================================-->
-      <Col span="12" >
-      <Card>
-        <p slot="title" style="height: 70px">专家组成结构图</p>
-        <p><div id="activity" style="height:400px;"></div></p>
-      </Card>
+      <Col span="10" >
+      <Row type="flex" justify="start" class="headTitle">
+        专家评分
+      </Row>
+      <Row class="card2" style="background-color: #5A7BEF">
+        <div id="goodline" style="min-height:300px;width: 100%"/>
+      </Row>
+      </Col>
+      <Col span="6">
+      <Row type="flex" justify="start" class="headTitle" >
+        专家擅长作物
+      </Row>
+      <Row class="card2" type="flex" justify="start">
+        <div id="activityPie" style="width: 100%;padding: 10px;"></div>
+      </Row>
       </Col>
     </Row>
   </div>
 </template>
-
 <script>
   import { FormateGroupData } from '../../framework/utils'
   import echarts from 'echarts'
   import china from 'echarts/map/js/china'
-  import { getExpertCart, getExpertHotMap, getExpertMap, getExpertOrder, getExpertCrop } from '../../api/api'
+  import { getExpertCart, getExpertHotMap, getExpertMap, getExpertOrderGood, getExpertOrderActivity, getExpertCrop, getExpertType } from '../../api/api'
   export default {
     data () {
       return {
@@ -196,7 +176,7 @@
           tooltip: {
             trigger: 'axis',
             axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-              type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+              type : 'line'        // 默认为直线，可选为：'line' | 'shadow'
             }
           },
           yAxis: {
@@ -231,13 +211,14 @@
           grid: {
             left: '3%',
             right: '9%',
-            bottom: '3%',
+            top: '11%',
             containLabel: true
           },
           series: [{
             name: '活跃度',
             type: 'bar',
             barCategoryGap: "35%",
+            barWidth: 20,
             label: {
               normal: {
                 show: true,
@@ -265,6 +246,154 @@
           }]
         })
       },
+      drawBarOrderActivity (id, edata) {
+        let vm = this
+        if (document.getElementById(id) === null) {
+          return false
+        }
+        let _chart = {}
+        _chart[id] = echarts.init(document.getElementById(id))
+        vm.chart = Object.assign({}, vm.chart, _chart)
+        vm['chart'][id].setOption({
+          tooltip: {
+            trigger: 'axis',
+            triggerOn: 'mousemove',
+            confine: true,
+            axisPointer : {
+              type : 'line',
+              lineStyle: {
+                color: '#fff',
+                width: 0.5,
+                type: 'solid'
+              }
+            },
+            formatter: "{b} <br/>{c}分  "
+          },
+          yAxis: {
+            type: 'value',
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: 'rgba(255,255,255,.2)'
+              }
+            },
+            axisTick: {
+              show: true,
+              lineStyle: {
+                color: 'rgba(255,255,255,.2)'
+              }
+            },
+            splitLine: {//分割线条样式
+              show: false,
+            },
+            axisLabel: {
+              color: '#fff',
+              show: true
+
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: edata.xAxis,
+            // data: ['张三杀',2,3,4,4,5,6,7,8,9,'张三杀'],
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: 'rgba(255,255,255,.2)'
+              }
+            },
+            axisTick: {
+              show: true,
+              lineStyle: {
+                color: 'rgba(255,255,255,.2)'
+              }
+            },
+            axisLabel: {
+              show: true,
+              interval: 'auto', //坐标显示间隔
+              textStyle: {
+                color: '#fff',
+                fontSize: 16,
+              },
+              align: 'left',
+            },
+            splitLine: {//分割线条样式
+              show: false,
+              lineStyle: {
+                color: '#83A7FE',
+                type: 'dashed',
+                width: 1,
+              }
+            }
+          },
+          // grid: {
+          //   left: '0%',
+          //   right: '0%',
+          //   bottom: '1%',
+          //   containLabel: true
+          // },
+          grid: {
+            left: '10%',
+            right: '10%',
+            bottom: '1%',
+            containLabel: true
+          },
+          series: [{
+            name: '专家评分',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showSymbol: false,
+            symbolSize: 3,
+            label: {
+              normal: {
+                show: true,
+                position: 'Top',
+                formatter: function(params) {
+                  return params.data.name
+                },
+                textStyle: {
+                  color: '#fff' //color of value
+                }
+              }
+            },
+            areaStyle: { //填充区颜色
+              normal: {
+                color: {
+                  type: 'linear',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [{ //填充区渐变色
+                    offset: 0,
+                    color: '#93aefb'
+                  }, {
+                    offset: 1,
+                    color: 'rgba(255, 255, 255, 0)'
+                  }]
+                }
+              }
+            },
+            lineStyle: {
+              normal: {
+                //曲线条颜色
+                color: '#93c3e6',
+                width: 2,
+                type: 'solid'
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: '#93aefb',
+              }
+            },
+            // data: [1,21,5,4,4,5,6,7,8,9,10],
+            data: edata.series[0].data
+          }]
+        })
+      },
       drawpie (id, edata) {
         let vm = this
         if (document.getElementById(id) === null) {
@@ -274,30 +403,101 @@
         _chart[id] = echarts.init(document.getElementById(id))
         vm.chart = Object.assign({}, vm.chart, _chart)
         vm['chart'][id].setOption({
-          // title: {
-          //   text: '专家组成结构图',
-          //   textStyle: {
-          //     fontWeight: 'lighter',
-          //     fontSize: 14
-          //   }
-          // },
           tooltip: {
             trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
+            formatter: "{a} <br/>{b}: {c}人 ({d}%)"
           },
           legend: {
-            orient: 'vertical',
-            x: 'right'
+            orient: 'horizontal',
+            bottom: '0'
           },
           series: [
             {
               name:'专家类别',
               type:'pie',
-              radius: ['40%', '55%'],
+              radius: ['25%', '40%'],
+              roseType : 'radius',
+              center:['50%','50%'],
               //  饼图 带线提示
               label: {
                 normal: {
-                  formatter: '{b}\n\n  数量:{c}  百分比:{d}%  ',
+                  formatter: '{b}: {c}人\n\n占比: {d}%  ',
+                }
+              },
+              data: edata
+            }
+          ]
+        })
+      },
+      drawpieCrop (id, edata) {
+        let vm = this
+        if (document.getElementById(id) === null) {
+          return false
+        }
+        let _chart = {}
+        _chart[id] = echarts.init(document.getElementById(id))
+        vm.chart = Object.assign({}, vm.chart, _chart)
+        vm['chart'][id].setOption({
+          tooltip: {
+            trigger: 'item',
+            formatter: "{b}专家: {c}人<br> 占比：{d}%"
+          },
+          legend: {
+            orient: 'horizontal',
+            bottom: '5%'
+          },
+          series: [
+            {
+              name:'',
+              type:'pie',
+              radius: ['30%', '45%'],
+              center:['50%','40%'],
+              color: [
+                new echarts.graphic.LinearGradient(
+                  0, 0, 0, 1,
+                  [
+                    {offset: 0, color: '#DC6060'},
+                    {offset: 1, color: '#ED8F8F'}
+                  ]
+                ),
+                new echarts.graphic.LinearGradient(
+                  0, 0, 0, 1,
+                  [
+                    {offset: 0, color: '#4A73D5'},
+                    {offset: 1, color: '#83A7FE'}
+                  ]
+                ),
+                new echarts.graphic.LinearGradient(
+                  0, 0, 0, 1,
+                  [
+                    {offset: 0, color: '#ECC869'},
+                    {offset: 1, color: '#EFDAA0'}
+                  ]
+                ),
+                new echarts.graphic.LinearGradient(
+                  0, 0, 0, 1,
+                  [
+                    {offset: 0, color: '#10C3D2'},
+                    {offset: 1, color: '#89E5E3'}
+                  ]
+                ),
+              ],
+              //  饼图 带线提示
+              label: {
+                normal: {
+                  formatter: '{b}专家: {c}人 \n\n占比:{d}% ',
+                  color: ['#4A73D5'],
+                }
+              },
+              itemStyle: {
+                normal: {
+                  borderWidth: 6,
+                  borderColor: '#ffffff',
+                }
+              },
+              labelLine: {
+                normal: {
+                  show: true
                 }
               },
               data: edata
@@ -369,7 +569,7 @@
           },
           series: [
             {
-              name: 'pm2.5',
+              // name: 'pm2.5',
               type: 'scatter',
               coordinateSystem: 'geo',
               data: edata,
@@ -456,22 +656,17 @@
           })
         } else {
           getExpertHotMap().then((resg) => {
-            var edata = resg.data.content
-            for (var i = 0; i < edata.length; i++) {
-              edata[i].name = edata[i].name.slice(0, edata[i].name.length - 1)
+            if (resg.data.code === 30000) {
+              var edata = resg.data.content
+              for (var i = 0; i < edata.length; i++) {
+                if (edata[i].name !== null) {
+                  edata[i].name = edata[i].name.slice(0, edata[i].name.length - 1)
+                }
+              }
             }
             this.drawMapArea('map', edata)
           })
         }
-      },
-      changeExpert () {
-        let par = {
-          id: this.expert
-        }
-        getExpertOrder(par).then((resp) => {
-          var edata = FormateGroupData(resp.data.content, 'line', false)
-          this.drawBarOrder('plant', edata)
-        })
       }
     },
     created () {
@@ -499,29 +694,41 @@
       let vm = this
       // 专家活跃度排行榜++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       vm.$nextTick(function () {
-        let par = {
-          id: vm.expert
-        }
-        getExpertOrder(par).then((resp) => {
+        getExpertOrderActivity().then((resp) => {
           edata = FormateGroupData(resp.data.content, 'line', false)
           vm.drawBarOrder('plant', edata)
+        })
+      })
+      // 专家好评度排行榜++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      vm.$nextTick(function () {
+        getExpertOrderGood().then((resp) => {
+          edata = FormateGroupData(resp.data.content, 'line', false)
+          vm.drawBarOrderActivity('goodline', edata)
+        })
+      })
+      // 专家类别饼图++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      vm.$nextTick(function () {
+        getExpertType().then((ress) => {
+          vm.drawpie('activity', ress.data.content)
         })
       })
       // 专家类别饼图++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       vm.$nextTick(function () {
         getExpertCrop().then((ress) => {
-          // edata = FormateGroupData(ress.data, 'line', false)
-          vm.drawpie('activity', ress.data.content)
+          vm.drawpieCrop('activityPie', ress.data.content)
         })
       })
       // 地图++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       vm.$nextTick(function () {
         getExpertHotMap().then((resg) => {
-          edata = resg.data.content
-          for (var i = 0; i < edata.length; i++) {
-            edata[i].name = edata[i].name.slice(0, edata[i].name.length - 1)
+          if (resg.data.code === 30000) {
+            edata = resg.data.content
+            for (var i = 0; i < edata.length; i++) {
+              if (edata[i].name !== null) {
+                edata[i].name = edata[i].name.slice(0, edata[i].name.length - 1)
+              }
+            }
           }
-          // console.log(edata)
           vm.drawMapArea('map', edata)
         })
       })
@@ -533,5 +740,43 @@
   .body {
     padding: 20px;
     text-align: left;
+    min-width: 1500px;
+  }
+  .card{
+    width: 100%;
+    min-height:560px;
+    background:#fff;
+    border-radius: 6px;
+    margin-top: 15px;
+  }
+  .card2{
+    width: 100%;
+    min-height:350px;
+    background:#fff;
+    border-radius: 6px;
+    margin-top: 15px;
+  }
+  .headTitle{
+    font-size: 20px;
+    color: #222;
+    margin-left: 10px;
+    position: relative;
+  }
+  .headTitle::before{
+    content: '';
+    display: block;
+    width: 2px;
+    height: 14px;
+    background:#2F91D8;
+    position: absolute;
+    top:10px;
+    left: -10px;
+  }
+  .mintor{
+    font-size: 16px;
+    color: #555;
+  }
+  .mintoritem{
+    margin-bottom: 20px;
   }
 </style>

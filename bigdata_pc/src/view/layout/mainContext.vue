@@ -38,7 +38,7 @@
 
   .main-content {
     width: 100% -200px;
-    position: fixed;
+    position: absolute;
     top: 60px;
     right: 0;
     bottom: 0;
@@ -53,7 +53,7 @@
   }
   .Col-main-content {
      width: 100% -78px;
-     position: fixed;
+     position: absolute;
      top: 60px;
      right: 0;
      bottom: 0;
@@ -67,7 +67,11 @@
      }
    }
   .layout-footer-center{
+    width:100% !important;
     text-align: center;
+    padding: 10px !important;
+    bottom:0;
+    right: 0;
   }
 </style>
 

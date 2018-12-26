@@ -5,6 +5,10 @@ import App from './App'
 import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+import VideoPlayer from 'vue-video-player'
+require('video.js/dist/video-js.css')
+require('vue-video-player/src/custom-theme.css')
+Vue.use(VideoPlayer)
 Vue.use(iView)
 Vue.config.productionTip = false
 

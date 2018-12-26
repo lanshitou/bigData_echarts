@@ -1,11 +1,6 @@
 <template>
   <div class="content">
-    <Row type="flex" justify="center">
-      <Col span="6">
-      <!--<img src="../assets/404.jpg" alt="not found">-->
-      </Col>
-    </Row>
-    <!--<img src="../assets/404.jpg" alt="not found">-->
+    <img src="../assets/404.jpg" alt="not found">
     <Row type="flex" justify="center">
       <Col span="6">
       <Button @click="back" type="primary" long class="btn">返回首页</Button>
